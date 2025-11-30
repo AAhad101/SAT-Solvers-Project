@@ -1,0 +1,23 @@
+SUDOKU SOLVER BENCHMARK RESULTS
+===============================
+
+Naive Backtracking
+  Correct: 95/95
+  Total Time: 2752.5645s
+  Avg Time: 28.97436s
+
+Backtracking + MRV
+  Correct: 95/95
+  Total Time: 131.2611s
+  Avg Time: 1.38170s
+
+Unit Propagation
+  Correct: 95/95
+  Total Time: 319.9175s
+  Avg Time: 3.36755s
+
+Backjumping (CBJ)
+  Correct: 95/95
+  Total Time: 1620.2685s
+  Avg Time: 17.05546s
+
