@@ -102,8 +102,8 @@ def solve_naive(clauses, num_vars):
     return backtrack(clauses, {})
 
 
-# --- Solver 2: MRV (Minimum Remaining Values) ---
-def solve_mrv(clauses, num_vars):
+# --- Solver 2: Degree Heuristic ---
+def solve_degree_heuristic(clauses, num_vars):
     
     def is_consistent(assignment, clauses):
         for clause in clauses:
@@ -121,7 +121,7 @@ def solve_mrv(clauses, num_vars):
                 return False
         return True
 
-    def select_mrv(variables, assignment, clauses):
+    def select_most_constrained_var(variables, assignment, clauses):
         best_var = None
         max_constraints = -1
         
@@ -148,7 +148,7 @@ def solve_mrv(clauses, num_vars):
         if not variables:
             return assignment if is_consistent(assignment, clauses) else None
         
-        var = select_mrv(variables, assignment, clauses)
+        var = select_most_constrained_var(variables, assignment, clauses)
         
         for val in [True, False]:
             assignment[var] = val
@@ -320,8 +320,8 @@ def worker(solver_name, clauses, num_vars, return_dict):
         start = time.time()
         if solver_name == "Naive":
             res = solve_naive(clauses, num_vars)
-        elif solver_name == "MRV":
-            res = solve_mrv(clauses, num_vars)
+        elif solver_name == "Degree Heuristic":
+            res = solve_degree_heuristic(clauses, num_vars)
         elif solver_name == "DPLL":
             res = solve_dpll(clauses, num_vars)
         elif solver_name == "Backjumping":
@@ -348,7 +348,7 @@ def run_benchmark():
     print(f"Benchmarking {len(files)} files in '{input_dir}' with {TIMEOUT}s timeout.")
     print("-" * 60)
     
-    solvers = ["Naive", "MRV", "DPLL", "Backjumping"]
+    solvers = ["Naive", "Degree Heuristic", "DPLL", "Backjumping"]
     
     for filepath in files:
         filename = os.path.basename(filepath)
