@@ -4,7 +4,7 @@ This repository contains implementations of various **Constraint
 Satisfaction Problem (CSP)** and **Boolean Satisfiability (SAT)**
 solvers. It includes:
 
--   SAT (DIMACS CNF)
+-   SAT
 -   Sudoku
 -   Minesweeper (SAT-based inference bot)
 
@@ -34,7 +34,7 @@ Located in `SAT/SAT_Dataset/`.
 
 ``` bash
 cd SAT
-python sat_benchmark.py
+python main.py
 ```
 
 # 2. Sudoku Solver
@@ -85,5 +85,5 @@ Use correct directory:
 
 ``` bash
 cd SAT
-python sat_benchmark.py
+python main.py
 ```
