@@ -30,28 +30,23 @@ This module implements four different algorithms to solve 3-SAT problems:
 
     Conflict-Directed Backjumping (CBJ)
 
-Setup & Data Generation
+Running the SAT Benchmark
 
-Before running the benchmarks, you need to generate the test datasets (CNF files).
+The project comes with a pre-populated dataset of Random 3-SAT and Pigeonhole Principle problems in the SAT_Dataset/ directory.
+
+To run the solvers against these files:
 
     Navigate to the SAT directory:
     Bash
 
 cd SAT
 
-Run the test generator. This will create a SAT_Dataset/ folder and populate it with Random 3-SAT problems and Pigeonhole Principle problems:
+Run the benchmark script:
 Bash
 
-    python generate_tests.py
+    python sat_benchmark.py
 
-Running the SAT Benchmark
-
-To run the solvers against the generated dataset using multiprocessing:
-Bash
-
-python sat_benchmark.py
-
-Note: This script will run all four solvers against the .cnf files in SAT_Dataset and output the execution time and validity of the solution.
+    This script will run all four solvers against the .cnf files and output the execution time and solution validity.
 
 2. Sudoku Solver
 
@@ -67,7 +62,7 @@ This module compares CSP techniques applied to Sudoku:
 
 Running the Sudoku Benchmark
 
-The project includes a dataset of 95 hard Sudoku puzzles (sudoku95test.txt).
+The project includes a dataset of 95 hard Sudoku puzzles (Sudoku_Dataset/sudoku95test.txt).
 
     Navigate to the Sudoku directory:
     Bash
@@ -79,9 +74,7 @@ Bash
 
     python main.py
 
-    Alternatively, you can run python sudoku_benchmark.py if available.
-
-This will attempt to solve the puzzles in Sudoku_Dataset/ and compare the performance of the different algorithms.
+    This will solve the puzzles and compare the performance of the different algorithms.
 
 3. Bonus: Minesweeper Solver
 
@@ -108,6 +101,6 @@ Bash
 
 Troubleshooting
 
-    RecursionError: Some solvers (especially Naive or pure DPLL on large inputs) may hit the Python recursion limit. The scripts include sys.setrecursionlimit(), but if you crash, try increasing this value in the respective .py file.
+    RecursionError: Some solvers (especially Naive or pure DPLL on large inputs) may hit the Python recursion limit. The scripts include sys.setrecursionlimit(), but if you experience a crash, try increasing this value in the respective .py file.
 
-    FileNotFoundError: Ensure you are running the scripts from inside their respective directories (e.g., run main.py from inside SAT/, not from the root), or ensure the *_Dataset folders exist.
+    FileNotFoundError: Ensure you are running the scripts from inside their respective directories (e.g., run main.py from inside Sudoku/, not from the root).
