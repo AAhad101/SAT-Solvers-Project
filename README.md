@@ -1,85 +1,130 @@
-# SAT & Constraint Satisfaction Project
+SAT & Constraint Satisfaction Project
 
-This project implements various Constraint Satisfaction Problem (CSP) and Boolean Satisfiability (SAT) solvers. It includes implementations for solving **SAT problems** (CNF format), **Sudoku puzzles**, and a **Minesweeper** bot using logic inference.
+This repository contains implementations of various Constraint Satisfaction Problem (CSP) and Boolean Satisfiability (SAT) solvers.
+It includes solvers for:
 
-## Project Structure
+SAT (DIMACS CNF)
 
-The project is divided into three main modules:
+Sudoku
 
-1.  **SAT/**: Core SAT solvers for DIMACS CNF files.
-2.  **Sudoku/**: Sudoku solvers comparing different heuristics.
-3.  **Bonus/**: A Minesweeper solver using a SAT-based approach (DPLL).
+Minesweeper (SAT-based inference bot)
 
-## Prerequisites
+All implementations rely only on Python's Standard Library
+(multiprocessing, unittest, random, sys, os, copy, itertools).
 
-* **Python 3.10** or higher.
-* No external packages (`pip install`) are required. This project uses the Python Standard Library (`multiprocessing`, `unittest`, `random`, `sys`, `os`, `copy`).
+📁 Project Structure
+.
+├── SAT/        → SAT solvers (Naive, Degree Heuristic, DPLL, CBJ)
+├── Sudoku/     → Sudoku solvers with CSP heuristics
+└── Bonus/      → Minesweeper solver using SAT logic inference
 
----
+1. SAT Solvers
 
-## 1. SAT Solvers
+This module implements four algorithms to solve 3-SAT problems:
 
-This module implements four different algorithms to solve 3-SAT problems:
-* **Naive Backtracking**
-* **Degree Heuristic**
-* **DPLL (Davis–Putnam–Logemann–Loveland) with Unit Propagation**
-* **Conflict-Directed Backjumping (CBJ)**
+✔️ Naive Backtracking
 
-### Running the SAT Benchmark
-The project comes with a pre-populated dataset of Random 3-SAT and Pigeonhole Principle problems in the `SAT_Dataset/` directory.
+✔️ Degree Heuristic
 
-To run the solvers against these files, navigate to the `SAT` directory and run the benchmark script:
+✔️ DPLL (Davis–Putnam–Logemann–Loveland) with Unit Propagation
 
-```bash
+✔️ Conflict-Directed Backjumping (CBJ)
+
+📂 Dataset
+
+Located in:
+
+SAT/SAT_Dataset/
+
+
+Includes:
+
+Random 3-SAT instances
+
+Pigeonhole Principle benchmarks
+
+▶️ Running the SAT Benchmark
 cd SAT
 python sat_benchmark.py
 
-This script will run all four solvers against the .cnf files and output the execution time and solution validity.
+
+The benchmark prints:
+
+Solver name
+
+Execution time
+
+Result (SAT / UNSAT)
 
 2. Sudoku Solver
 
-This module compares CSP techniques applied to Sudoku:
+This module compares multiple CSP strategies applied to Sudoku:
 
-    Backtracking
+✔️ Naive Backtracking
 
-    Minimum Remaining Values (MRV)
+✔️ Backtracking + MRV (Minimum Remaining Values)
 
-    Unit Propagation
+✔️ Unit Propagation
 
-    Backjumping
+✔️ Conflict-Directed Backjumping (CBJ)
 
-Running the Sudoku Benchmark
+📂 Dataset
+Sudoku/Sudoku_Dataset/
 
-The project includes a dataset of 95 hard Sudoku puzzles (Sudoku_Dataset/sudoku95test.txt).
 
-To solve the puzzles and compare the performance of the different algorithms, navigate to the Sudoku directory and run the main script:
-Bash
+Contains 95 hard Sudoku puzzles.
 
+▶️ Running the Sudoku Benchmark
 cd Sudoku
 python main.py
 
-3. Bonus: Minesweeper Solver
 
-This module uses a custom SAT solver (DPLL) to logically deduce safe squares in Minesweeper without guessing.
+The script solves all puzzles and compares performance across algorithms.
 
-Running the Tests
+3. Bonus: Minesweeper Solver (SAT-Based)
 
-There are two test suites available to verify the solver's logic against various board configurations. Navigate to the Bonus directory to run them.
+This module uses a DPLL SAT solver to play Minesweeper without guessing.
+It deduces:
 
-Run the basic test suite:
-Bash
+✔️ Safe cells
+
+✔️ Mine cells
+
+based purely on logical inference.
+
+▶️ Running Tests
+
+1. Basic Test Suite
 
 cd Bonus
 python testing-suite-1.py
 
-Run the comprehensive test suite (includes corner cases and complex logic patterns):
-Bash
+
+2. Comprehensive Test Suite
+Tests advanced patterns (1-2-1, extended constraints, corners):
 
 cd Bonus
 python testing-suite-2.py
 
-Troubleshooting
+🛠 Troubleshooting
+1. RecursionError
 
-    RecursionError: Some solvers (especially Naive or pure DPLL on large inputs) may hit the Python recursion limit. The scripts include sys.setrecursionlimit(), but if you experience a crash, try increasing this value in the respective .py file.
+Some solvers (e.g., Naive Backtracking) may exceed Python's recursion limit.
 
-    FileNotFoundError: Ensure you are running the scripts from inside their respective directories (e.g., run main.py from inside Sudoku/, not from the root).
+Fix by increasing sys.setrecursionlimit():
+
+sys.setrecursionlimit(10000)
+
+2. FileNotFoundError
+
+Scripts use relative paths, so run them from inside their respective folders:
+
+❌ Wrong:
+
+python SAT/sat_benchmark.py
+
+
+✔️ Correct:
+
+cd SAT
+python sat_benchmark.py
